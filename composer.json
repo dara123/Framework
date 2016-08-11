@@ -1,7 +1,7 @@
 {
-    "name": "dim",
+    "name": "Xuexue",
     "type": "library",
-    "description": "Dim is a PHP micro framework",
+    "description": "Xuexue is a PHP micro framework",
     "keywords": ["framework", "micro", "router"],
     "license": "MIT",
     "authors": [
