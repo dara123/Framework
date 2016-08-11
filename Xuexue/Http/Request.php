@@ -2,6 +2,11 @@
 
 namespace Xuexue\Htpp;
 
+/**
+ * Description of Request
+ *
+ * @author DARA123
+ */
 class Request
 {
     private $method;
