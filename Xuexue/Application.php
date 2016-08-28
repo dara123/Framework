@@ -7,8 +7,6 @@ namespace Xuexue;
  *
  * @author DARA123
  */
-use Htpp\Request;
-use Htpp\Response;
 
 class Application 
 {
@@ -32,15 +30,6 @@ class Application
     {
         return self::VERSION;
     }
-
-    //put your code here
-    public function run()
-    {
-        $route = $this->routeFactory->match();
-        if ($route !== null) {
-            call_user_func($route->getCallable());
-        }
-    }
     
     /**
      * 
@@ -49,7 +38,7 @@ class Application
      */
     public function get($pattern, $callable)
     {
-        $this->addToRoute('GET', $pattern, $callable);
+        $this->container->get('route')->add(['GET'], $pattern, $callable);
     }
     
     /**
@@ -59,7 +48,7 @@ class Application
      */
     public function post($pattern, $callable)
     {
-        $this->addToRoute('POST', $pattern, $callable);
+        $this->container->get('route')->add(['POST'], $pattern, $callable);
     }
     
     /**
@@ -69,12 +58,12 @@ class Application
      */
     public function put($pattern, $callable)
     {
-        $this->addToRoute('PUT', $pattern, $callable);
+        $this->container->get('route')->add(['PUT'], $pattern, $callable);
     }
     
     public function patch($pattern, $callable)
     {
-        $this->addToRoute('PATCH', $pattern, $callable);
+        $this->container->get('route')->add(['PATCH'], $pattern, $callable);
     }
     
     /**
@@ -84,7 +73,7 @@ class Application
      */
     public function delete($pattern, $callable)
     {
-        $this->addToRoute('DELETE', $pattern, $callable);
+        $this->container->get('route')->add(['DELETE'], $pattern, $callable);
     }
     
     /**
@@ -94,7 +83,7 @@ class Application
      */
     public function options($pattern, $callable)
     {
-        $this->addToRoute('OPTIONS', $pattern, $callable);
+        $this->container->get('route')->add(['OPTIONS'], $pattern, $callable);
     }
     
     /**
@@ -104,17 +93,26 @@ class Application
      */
     public function all($pattern, $callable)
     {
-        
+        $this->container->get('route')->add(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $pattern, $callable);
     }
-
+    
+    /**
+     * Run application
+     */
+    public function run()
+    {
+        $route = $this->routeFactory->match();
+        if ($route !== null) {
+            $this->finalize();
+        }
+    }
+    
     /**
      * 
-     * @param string $verb
-     * @param string $pattern
-     * @param mixed $callable
+     * @return type
      */
-    private function addToRoute($verb, $pattern, $callable)
+    private function finalize()
     {
-        $this->routeFactory->add($verb, $pattern, $callable);
+        return call_user_func($route->getCallable());
     }
 }

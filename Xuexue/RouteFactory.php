@@ -30,6 +30,17 @@ class RouteFactory
 
     /**
      * 
+     * @param string $verb
+     * @param string $pattern
+     * @param mixed $callable
+     */
+    public function addToRoute($verb, $pattern, $callable)
+    {
+        $this->container->get('route')->add($verb, $pattern, $callable);
+    }
+
+    /**
+     * 
      */
     public function match()
     {

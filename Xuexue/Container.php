@@ -33,4 +33,15 @@ class Container
         $this->container['request'] = new Request();
         $this->container['response'] = new Response();
     }
+    
+    /**
+     * 
+     * @param string $name
+     * 
+     * return mixed
+     */
+    public function get($name)
+    {
+        return $this->container[$name] ?? null;
+    }
 }
