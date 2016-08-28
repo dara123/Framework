@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 namespace Xuexue;
+
 /**
  * Description of ServiceProvider
  *

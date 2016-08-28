@@ -6,6 +6,10 @@
  * and open the template in the editor.
  */
 namespace Xuexue;
+
+use Htpp\Request;
+use Htpp\Response;
+
 /**
  * Description of Container
  *
@@ -13,5 +17,20 @@ namespace Xuexue;
  */
 class Container 
 {
-    //put your code here
+    private $container;
+    
+    public function __construct($config = []) 
+    {
+        $this->setDefaultContainer();
+    }
+    
+    /**
+     * Set default contain need to application
+     */
+    private function setDefaultContainer()
+    {
+        $this->container['route'] = new RouteFactory();
+        $this->container['request'] = new Request();
+        $this->container['response'] = new Response();
+    }
 }

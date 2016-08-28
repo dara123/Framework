@@ -14,17 +14,14 @@ class Application
 {
     const VERSION = 'v 1.0';
     
-    private $routeFactory;
-    private $request;
-    private $response;
+    private $container;
+
     /**
      * Contructor
      */
     public function __construct() 
     {
-        $this->routeFactory = new RouteFactory();
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->container = new Container();
     }
 
     /**
