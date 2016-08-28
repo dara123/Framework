@@ -2,13 +2,18 @@
 
 namespace Xuexue\Htpp;
 
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
+
 /**
  * Description of Request
  *
  * @author DARA123
  */
-class Request
+class Request implements ServerRequestInterface
 {
+    private $attributes;
     private $method;
     private $uri;
     private $headers;
@@ -16,67 +21,244 @@ class Request
     private $postParams;
     private $body;
     private $serverParams;
+    private $cookieParams;
 
-    public function __construct()
+    /**
+     * {@inherit}
+     */
+    public function getAttribute($name, $default = null) 
     {
-        $this->fromGlobals();
+        return $this->attributes[$name] ?? $default;
     }
 
-    public function getUri()
+    /**
+     * {@inherit}
+     */
+    public function getAttributes() 
     {
-        return $this->uri;
+        return $this->attributes;
     }
 
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    public function getHeaders()
-    {
-        return $this->headers;
-    }
-
-    public function getBody()
+    /**
+     * {@inherit}
+     */
+    public function getBody() 
     {
         return $this->body;
     }
 
-    public function getServerParams()
+    /**
+     * {@inherit}
+     */
+    public function getHeaders() 
+    {
+        return $this->headers;
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getMethod() 
+    {
+        return $this->method;
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getServerParams() 
     {
         return $this->serverParams;
     }
 
-    public function getParams()
+    /**
+     * {@inherit}
+     */
+    public function getUri()
     {
-        return $this->params;
+        return $this->uri;
+    }
+    
+    /**
+     * {@inherit}
+     */
+    public function getCookieParams() 
+    {
+        return $this->cookieParams;
     }
 
-    public function getPostParams()
+    /**
+     * {@inherit}
+     */
+    public function getHeader($name) 
     {
-        return $this->postParams;
+        return $this->headers[$name];
     }
 
-    private function fromGlobals()
-    {
-        $this->method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-        $this->headers = function_exists('getallheaders') ? getallheaders() : $this->getAllHeaders();
-        $this->uri = $_SERVER['REQUEST_URI'] ?? null;
-        $this->serverParams = $_SERVER;
-        $this->params = $_GET;
-        $this->postParams = $_POST;
+    /**
+     * {@inherit}
+     */
+    public function getHeaderLine($name) {
+        
     }
 
-    private function getAllHeaders()
+    /**
+     * {@inherit}
+     */
+    public function getParsedBody() 
     {
-        $headers = '';
-        foreach ($_SERVER as $name => $value)
-        {
-            if (substr($name, 0, 5) == 'HTTP_')
-            {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-            }
-        }
-        return $headers;
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getProtocolVersion() 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getQueryParams() 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getRequestTarget() 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getUploadedFiles() 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function hasHeader($name) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withAddedHeader($name, $value) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withAttribute($name, $value) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withBody(StreamInterface $body) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withCookieParams(array $cookies) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withHeader($name, $value) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withMethod($method) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withParsedBody($data) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withProtocolVersion($version) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withQueryParams(array $query) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withRequestTarget($requestTarget) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withUploadedFiles(array $uploadedFiles) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withUri(UriInterface $uri, $preserveHost = false) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withoutAttribute($name) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withoutHeader($name) 
+    {
+        
     }
 }

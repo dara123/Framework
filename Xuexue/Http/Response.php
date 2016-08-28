@@ -2,53 +2,131 @@
 
 namespace Xuexue\Htpp;
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
+
 /**
  * Description of Response
  *
  * @author DARA123
  */
-class Response
+class Response implements ResponseInterface
 {
     private $statusCode;
     private $headers;
     private $body;
-
-    public function __construct($status = 200, array $headers = [], $body = null)
-    {
-        $this->statusCode = (int) $status;
-        $this->setHeaders($headers);
-        if (!empty($body)) {
-            $this->setBody($body);
-        }
-    }
-
-    public function getBody()
+    private $protocolVersion;
+    private $reasonPhrase;
+    /**
+     * {@inherit}
+     */
+    public function getBody() 
     {
         return $this->body;
     }
 
-    public function setBody($body)
+    /**
+     * {@inherit}
+     */
+    public function getHeader($name) 
     {
-        $this->body = $body;
+        return $this->headers[$name];
     }
 
-    public function getHeaders()
+    /**
+     * {@inherit}
+     */
+    public function getHeaderLine($name) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getHeaders()         
     {
         return $this->headers;
     }
 
-    public function setHeaders($headers)
+    /**
+     * {@inherit}
+     */
+    public function getProtocolVersion() 
     {
-        $this->headers = $headers;
+        return $this->protocolVersion;
     }
 
-    public function getStatusCode()
+    /**
+     * {@inherit}
+     */
+    public function getReasonPhrase() 
+    {
+        return $this->reasonPhrase;
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getStatusCode() 
     {
         return $this->statusCode;
     }
 
-    public function setStatusCode($statusCode)
+    /**
+     * {@inherit}
+     */
+    public function hasHeader($name) 
     {
-        $this->statusCode = $statusCode;
+        return isset($this->headers[$name]);
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withAddedHeader($name, $value)
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withBody(StreamInterface $body) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withHeader($name, $value) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withProtocolVersion($version) 
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withStatus($code, $reasonPhrase = '')
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function withoutHeader($name) 
+    {
+        
     }
 }
+
