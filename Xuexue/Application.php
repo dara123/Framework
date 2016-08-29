@@ -101,9 +101,15 @@ class Application
      */
     public function run()
     {
-        $route = $this->routeFactory->match();
+        $route = $this->container->get('route')->match(
+            $this->container->get('request'),
+            $this->container->get('response')
+        );
+        var_dump($route);
         if ($route !== null) {
-            $this->finalize();
+            return $this->finalize();
+        } else {
+            return $this->error();
         }
     }
     
@@ -114,5 +120,10 @@ class Application
     private function finalize()
     {
         return call_user_func($route->getCallable());
+    }
+    
+    private function error()
+    {
+        echo 'Error';
     }
 }

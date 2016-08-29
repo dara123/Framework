@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Xuexue\Htpp;
+namespace Xuexue\Http;
 
 /**
  * Description of HttpCode

@@ -1,6 +1,6 @@
 <?php
 
-namespace Xuexue\Htpp;
+namespace Xuexue\Http;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -10,33 +10,18 @@ use Psr\Http\Message\StreamInterface;
  *
  * @author DARA123
  */
-class Response implements ResponseInterface
+class Response implements ResponseInterface 
 {
     private $statusCode;
     private $headers;
     private $body;
     private $protocolVersion;
     private $reasonPhrase;
-    /**
-     * {@inherit}
-     */
-    public function getBody() 
-    {
-        return $this->body;
-    }
 
     /**
      * {@inherit}
      */
-    public function getHeader($name) 
-    {
-        return $this->headers[$name];
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function getHeaderLine($name) 
+    public function getBody()
     {
         
     }
@@ -44,41 +29,57 @@ class Response implements ResponseInterface
     /**
      * {@inherit}
      */
-    public function getHeaders()         
+    public function getHeader($name)
     {
-        return $this->headers;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getProtocolVersion() 
+    public function getHeaderLine($name)
     {
-        return $this->protocolVersion;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getReasonPhrase() 
+    public function getHeaders()
     {
-        return $this->reasonPhrase;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getStatusCode() 
+    public function getProtocolVersion()
     {
-        return $this->statusCode;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function hasHeader($name) 
+    public function getReasonPhrase()
     {
-        return isset($this->headers[$name]);
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getStatusCode()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function hasHeader($name)
+    {
+        
     }
 
     /**
@@ -92,7 +93,7 @@ class Response implements ResponseInterface
     /**
      * {@inherit}
      */
-    public function withBody(StreamInterface $body) 
+    public function withBody(StreamInterface $body)
     {
         
     }
@@ -100,7 +101,7 @@ class Response implements ResponseInterface
     /**
      * {@inherit}
      */
-    public function withHeader($name, $value) 
+    public function withHeader($name, $value)
     {
         
     }
@@ -108,7 +109,7 @@ class Response implements ResponseInterface
     /**
      * {@inherit}
      */
-    public function withProtocolVersion($version) 
+    public function withProtocolVersion($version)
     {
         
     }
@@ -124,9 +125,8 @@ class Response implements ResponseInterface
     /**
      * {@inherit}
      */
-    public function withoutHeader($name) 
+    public function withoutHeader($name)
     {
         
     }
 }
-

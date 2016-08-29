@@ -7,8 +7,8 @@
  */
 namespace Xuexue;
 
-use Htpp\Request;
-use Htpp\Response;
+use Xuexue\Http\Request;
+use Xuexue\Http\Response;
 
 /**
  * Description of Container

@@ -1,6 +1,6 @@
 <?php
 
-namespace Xuexue\Htpp;
+namespace Xuexue\Http;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -23,52 +23,119 @@ class Request implements ServerRequestInterface
     private $serverParams;
     private $cookieParams;
 
-    /**
-     * {@inherit}
-     */
-    public function getAttribute($name, $default = null) 
+    public function __construct() 
     {
-        return $this->attributes[$name] ?? $default;
+        $this->uri = $_SERVER['REQUEST_URI'];
+        $this->method = $_SERVER['REQUEST_METHOD'];
     }
 
     /**
      * {@inherit}
      */
-    public function getAttributes() 
+    public function getAttribute($name, $default = null)
     {
-        return $this->attributes;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getBody() 
+    public function getAttributes()
     {
-        return $this->body;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getHeaders() 
+    public function getBody()
     {
-        return $this->headers;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getMethod() 
+    public function getCookieParams()
     {
-        return $this->method;
+        
     }
 
     /**
      * {@inherit}
      */
-    public function getServerParams() 
+    public function getHeader($name)
     {
-        return $this->serverParams;
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getHeaderLine($name)
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getHeaders()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getMethod()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getParsedBody()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getProtocolVersion()
+    {
+        
+    }
+
+    public function getQueryParams()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getRequestTarget()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getServerParams()
+    {
+        
+    }
+
+    /**
+     * {@inherit}
+     */
+    public function getUploadedFiles()
+    {
+        
     }
 
     /**
@@ -76,36 +143,13 @@ class Request implements ServerRequestInterface
      */
     public function getUri()
     {
-        return $this->uri;
-    }
-    
-    /**
-     * {@inherit}
-     */
-    public function getCookieParams() 
-    {
-        return $this->cookieParams;
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function getHeader($name) 
-    {
-        return $this->headers[$name];
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function getHeaderLine($name) {
         
     }
 
     /**
      * {@inherit}
      */
-    public function getParsedBody() 
+    public function hasHeader($name)
     {
         
     }
@@ -113,7 +157,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function getProtocolVersion() 
+    public function withAddedHeader($name, $value)
     {
         
     }
@@ -121,7 +165,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function getQueryParams() 
+    public function withAttribute($name, $value)
     {
         
     }
@@ -129,7 +173,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function getRequestTarget() 
+    public function withBody(StreamInterface $body)
     {
         
     }
@@ -137,7 +181,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function getUploadedFiles() 
+    public function withCookieParams(array $cookies)
     {
         
     }
@@ -145,7 +189,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function hasHeader($name) 
+    public function withHeader($name, $value)
     {
         
     }
@@ -153,7 +197,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withAddedHeader($name, $value) 
+    public function withMethod($method)
     {
         
     }
@@ -161,7 +205,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withAttribute($name, $value) 
+    public function withParsedBody($data)
     {
         
     }
@@ -169,7 +213,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withBody(StreamInterface $body) 
+    public function withProtocolVersion($version)
     {
         
     }
@@ -177,7 +221,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withCookieParams(array $cookies) 
+    public function withQueryParams(array $query)
     {
         
     }
@@ -185,7 +229,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withHeader($name, $value) 
+    public function withRequestTarget($requestTarget)
     {
         
     }
@@ -193,7 +237,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withMethod($method) 
+    public function withUploadedFiles(array $uploadedFiles)
     {
         
     }
@@ -201,7 +245,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withParsedBody($data) 
+    public function withUri(UriInterface $uri, $preserveHost = false)
     {
         
     }
@@ -209,7 +253,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withProtocolVersion($version) 
+    public function withoutAttribute($name)
     {
         
     }
@@ -217,47 +261,7 @@ class Request implements ServerRequestInterface
     /**
      * {@inherit}
      */
-    public function withQueryParams(array $query) 
-    {
-        
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function withRequestTarget($requestTarget) 
-    {
-        
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function withUploadedFiles(array $uploadedFiles) 
-    {
-        
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function withUri(UriInterface $uri, $preserveHost = false) 
-    {
-        
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function withoutAttribute($name) 
-    {
-        
-    }
-
-    /**
-     * {@inherit}
-     */
-    public function withoutHeader($name) 
+    public function withoutHeader($name)
     {
         
     }

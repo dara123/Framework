@@ -8,6 +8,9 @@
 
 namespace Xuexue;
 
+use Xuexue\Http\Request;
+use Xuexue\Http\Response;
+
 /**
  * Description of RouteFactory
  *
@@ -30,24 +33,18 @@ class RouteFactory
 
     /**
      * 
-     * @param string $verb
-     * @param string $pattern
-     * @param mixed $callable
-     */
-    public function addToRoute($verb, $pattern, $callable)
-    {
-        $this->container->get('route')->add($verb, $pattern, $callable);
-    }
-
-    /**
+     * @param Request $request
+     * @param Response $response
      * 
+     * @return Route|null
      */
-    public function match()
+    public function match(Request $request, Response $response)
     {
-        $uri = $_SERVER['REQUEST_URI'];
-        $verb = $_SERVER['REQUEST_METHOD'];
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+
         foreach ($this->routes as $route) {
-            if (preg_match("#^{$route->getUri()}$#", $uri) &&  $route->getVerb() === $verb) {
+            if (preg_match("#^{$route->getUri()}$#", $uri) &&  $route->getVerb() === $method) {
                 return $route;
             }
         }
