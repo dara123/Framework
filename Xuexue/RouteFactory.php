@@ -22,13 +22,13 @@ class RouteFactory
 
     /**
      * 
-     * @param string $verb
+     * @param array $methods
      * @param string $pattern
      * @param string $callable
      */
-    public function add($verb, $pattern, $callable)
+    public function add($methods, $pattern, $callable)
     {
-        $this->routes[] = new Route($verb, $pattern, $callable);
+        $this->routes[] = new Route($methods, $pattern, $callable);
     }
 
     /**
@@ -44,7 +44,9 @@ class RouteFactory
         $method = $request->getMethod();
 
         foreach ($this->routes as $route) {
-            if (preg_match("#^{$route->getUri()}$#", $uri) &&  $route->getVerb() === $method) {
+            if (preg_match("#^{$route->getUri()}$#", $uri) && 
+                in_array($method, $route->getMethods())
+            ) {
                 return $route;
             }
         }

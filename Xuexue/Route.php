@@ -11,12 +11,12 @@ class Route
 {
     private $baseUrl = '';
     private $uri;
-    private $verb;
+    private $methods;
     private $callable;
     
-    public function __construct($verb, $uri, $callable)
+    public function __construct($methods, $uri, $callable)
     {
-        $this->verb = $verb;
+        $this->methods = $methods;
         $this->uri = $uri;
         $this->callable = $callable;
     }
@@ -26,9 +26,9 @@ class Route
         return $this->uri;
     }
     
-    public function getVerb()
+    public function getMethods()
     {
-        return $this->verb;
+        return $this->methods;
     }
     
     public function getCallable()

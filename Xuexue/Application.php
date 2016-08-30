@@ -2,6 +2,9 @@
 
 namespace Xuexue;
 
+use Xuexue\Http\Request;
+use Xuexue\Http\Response;
+
 /**
  * Description of Application
  *
@@ -31,6 +34,15 @@ class Application
         return self::VERSION;
     }
     
+    /**
+     * 
+     * @return Container $container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
     /**
      * 
      * @param string $pattern
@@ -89,7 +101,7 @@ class Application
     /**
      * 
      * @param string $pattern
-     * @param string $callable
+     * @param mixed $callable
      */
     public function all($pattern, $callable)
     {
@@ -101,18 +113,23 @@ class Application
      */
     public function run()
     {
-        $route = $this->container->get('route')->match(
-            $this->container->get('request'),
-            $this->container->get('response')
-        );
-        var_dump($route);
+        $request = $this->container->get('request');
+        $response = $this->container->get('response');
+        $route = $this->container->get('route')->match($request, $response);
+
         if ($route !== null) {
-            return $this->finalize();
+            return $this->process($request, $response);
         } else {
             return $this->error();
         }
     }
     
+    
+    private function process(Request $request, Response $response) 
+    {
+        
+    }
+
     /**
      * 
      * @return type
@@ -125,5 +142,22 @@ class Application
     private function error()
     {
         echo 'Error';
+    }
+    
+    /**
+     *
+     * @param string $method
+     * @param array $args
+     * 
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        if ($this->container->has($method)) {
+            $object = $this->container->get($method);
+            if (is_callable($object)) {
+                return call_user_func_array($object, $args);
+            }
+        }
     }
 }

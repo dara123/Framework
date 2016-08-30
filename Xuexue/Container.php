@@ -19,6 +19,10 @@ class Container
 {
     private $container;
     
+    /**
+     * 
+     * @param array $config
+     */
     public function __construct($config = []) 
     {
         $this->setDefaultContainer();
@@ -43,5 +47,16 @@ class Container
     public function get($name)
     {
         return $this->container[$name] ?? null;
+    }
+    
+    /**
+     * 
+     * @param string $name
+     * 
+     * @return bool
+     */
+    public function has($name)
+    {
+        return isset($this->container[$name]);
     }
 }
